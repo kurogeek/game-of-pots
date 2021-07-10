@@ -22,7 +22,6 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 3306
-        - containerPort: 33060
         env:
           - name: MYSQL_ROOT_PASSWORD
             valueFrom:
