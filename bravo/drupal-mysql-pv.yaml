@@ -9,3 +9,4 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: /drupal-mysql-data
+    type: DirectoryOrCreate
