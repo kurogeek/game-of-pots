@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drupal
+  labels:
+    app: drupal
+spec:
+  selector:
+    matchLabels:
+      app: drupal
+  template:
+    metadata:
+      labels:
+        app: drupal
+    spec:
+      initContainers:
+      - name: init-sites-volume
+        image: drupal:8.6
+        volumeMounts:
+          - name: dp-persistent-storage
+            mountPath: /data
+        command:
+          - "/bin/bash"
+          - "-c"
+        args:
+          - "cp -r /var/www/html/sites/ /data/; chown www-data:www-data /data/ -R"
+      containers:
+      - name: drupal
+        image: drupal:8.6
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: dp-persistent-storage
+          mountPath: /var/www/html/modules
+          subPath: modules
+        - name: dp-persistent-storage
+          mountPath: /var/www/html/profiles
+          subPath: profiles
+        - name: dp-persistent-storage
+          mountPath: /var/www/html/sites
+          subPath: sites
+        - name: dp-persistent-storage
+          mountPath: /var/www/html/themes
+          subPath: themes
+      volumes:
+      - name: dp-persistent-storage
+        persistentVolumeClaim:
+          claimName: drupal-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: drupal-service
+spec:
+  type: NodePort
+  selector:
+    app: drupal
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30095
+    protocol: TCP
