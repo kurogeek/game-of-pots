@@ -25,17 +25,17 @@ spec:
           - name: MYSQL_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:
-                key: drupal-mysql-root-password
+                key: MYSQL_ROOT_PASSWORD
                 name: drupal-mysql-secret
           - name: MYSQL_DATABASE
             valueFrom:
               secretKeyRef:
-                key: drupal-mysql-database
+                key: MYSQL_DATABASE
                 name: drupal-mysql-secret
           - name: MYSQL_USER
             valueFrom:
               secretKeyRef:
-                key: drupal-mysql-user
+                key: MYSQL_USER
                 name: drupal-mysql-secret
         volumeMounts:
           - name: mysql-persistent-data
