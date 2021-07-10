@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: drupal-mysql
+labels:
+    app: drupal-mysql
 spec:
   selector:
     matchLabels:
@@ -52,7 +54,7 @@ metadata:
   name: drupal-mysql-service
 spec:
   selector:
-    app: drupal-mysql-service
+    app: drupal-mysql
   ports:
   - port: 3306
     targetPort: 3306
