@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gop-fileserver
+spec:
+  selector:
+    matchLabels:
+      app: gop-fileserver
+  template:
+    metadata:
+      labels:
+        app: gop-fileserver
+    spec:
+      containers:
+      - name: gop-fileserver
+        image: kodekloud/fileserver
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+          - name: data-store
+            mountPath: /web
+      volumes:
+        - name: data-store
+          persistentVolumeClaim:
+            claimName: data-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gop-fs-service
+spec:
+  selector:
+    app: gop-fileserver
+  ports:
+  - port: 8080
+    targetPort: 8080
