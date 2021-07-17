@@ -32,5 +32,6 @@ spec:
   selector:
     app: gop-fileserver
   ports:
-  - port: 31200
+  - port: 8080
+    nodePort: 31200
     targetPort: 8080
