@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: jekyll
   labels:
-    name: run=jekyll
+    run: jekyll
   namespace: development
 spec:
   initContainers:
