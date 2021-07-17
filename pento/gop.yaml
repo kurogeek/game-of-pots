@@ -28,6 +28,7 @@ kind: Service
 metadata:
   name: gop-fs-service
 spec:
+  type: NodePort
   selector:
     app: gop-fileserver
   ports:
