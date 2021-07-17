@@ -25,11 +25,10 @@ spec:
     volumeMounts:
       - name: site
         mountPath: /site
-    
   volumes:
     - name: site
       persistentVolumeClaim:
-        claimName: jekyll-pvc
+        claimName: jekyll-site
 ---
 apiVersion: v1
 kind: Service
