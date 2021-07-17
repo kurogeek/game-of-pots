@@ -37,7 +37,7 @@ metadata:
   name: jekyll
 spec:
   selector:
-    app: jekyll
+    run: jekyll
   type: NodePort
   ports:
   - port: 8080
