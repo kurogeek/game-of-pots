@@ -18,3 +18,4 @@ spec:
           limits:
             memory: "128Mi"
             cpu: "500m"
+        command: ["/bin/sh", "-c", "dotnet src/Worker/Worker.dll"]

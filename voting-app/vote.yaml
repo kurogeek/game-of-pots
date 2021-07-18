@@ -21,6 +21,7 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 80
+        command: ["gunicorn", "app:app", "-b", "0.0.0.0:80", "--log-file", "-", "--access-logfile", "-", "--workers", "4", "--keep-alive", "0"]
 ---
 apiVersion: v1
 kind: Service
