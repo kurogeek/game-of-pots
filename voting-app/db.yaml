@@ -15,10 +15,6 @@ spec:
       containers:
       - name: db-deployment
         image: postgres:9.4
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
         ports:
         - containerPort: 5432
         volumeMounts:
