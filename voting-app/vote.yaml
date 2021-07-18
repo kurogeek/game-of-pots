@@ -15,10 +15,6 @@ spec:
       containers:
       - name: vote-deployment
         image: kodekloud/examplevotingapp_vote:before
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
         ports:
         - containerPort: 80
         command: ["gunicorn", "app:app", "-b", "0.0.0.0:80", "--log-file", "-", "--access-logfile", "-", "--workers", "4", "--keep-alive", "0"]
